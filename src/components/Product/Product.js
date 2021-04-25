@@ -5,7 +5,7 @@ import "./Product.css";
 const Product = ({ id, title, image, price, rating }) => {
   const [{ basket }, dispatch] = useStateValue();
 
-  console.log("basket contains-------- ", basket);
+  // console.log("basket contains-------- ", basket);
 
   const addToBasket = () => {
     //dispatch the item into the dataLayer
@@ -33,7 +33,7 @@ const Product = ({ id, title, image, price, rating }) => {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <p>⭐</p>
+              <p key={i}>⭐</p>
             ))}
         </div>
       </div>
