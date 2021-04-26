@@ -57,7 +57,11 @@ const Payment = () => {
         setProcessing(false);
         console.log("2", processing);
 
-        history.replace("/order");
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
+
+        history.replace("/orders");
       });
     // payload();
   };
