@@ -8,13 +8,19 @@ import { useEffect } from "react";
 import { auth } from "./firebase";
 import { useStateValue } from "./components/StateProvider";
 import Payment from "./components/Payment/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const promise = loadStripe(
+  "pk_test_51IkTJxSCZFnoiTRu5vQn2G51Digb5jJIyJpwvbZiGHFdxsxWu0zWce8l00g1ZRSIjmfXb24LPj6AvkXqD7IC0KZu00NHdUmM48"
+);
 
 function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log("This user is ", authUser);
+      // console.log("This user is ", authUser);
 
       if (authUser) {
         // the user just logged in
@@ -49,7 +55,9 @@ function App() {
           </Route>
           <Route path="/payment">
             <Header />
-            <Payment />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
           </Route>
           <Route path="/">
             <Header />
