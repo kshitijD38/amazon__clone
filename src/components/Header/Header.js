@@ -32,7 +32,7 @@ function Header() {
         <Link to={!user && "/login"} style={{ textDecoration: "none" }}>
           <div onClick={handleAuthentication} className="header_option">
             <span className="header_optionLineOne">
-              Hello, {!user ? `Guest` : user?.email}
+              Hello, {!user ? `Guest` : user.email}
             </span>
             <span className="header_optionLineTwo">
               {user ? `Sign Out` : `Sign In`}
