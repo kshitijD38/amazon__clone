@@ -39,7 +39,7 @@ const Subtotal = () => {
         // value={0}
         displayType={"text"}
         thousandSeparator={true}
-        prefix={"$"}
+        prefix={"₹"}
       />
       <button onClick={(e) => history.push("/payment")}>
         Proceed to Checkout

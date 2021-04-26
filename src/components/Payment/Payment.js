@@ -7,6 +7,7 @@ import CheckoutProduct from "../CheckoutProduct/CheckoutProduct";
 import { getBasketTotal } from "../reducer";
 import { useStateValue } from "../StateProvider";
 import "./Payment.css";
+import { db } from "../../firebase";
 
 const Payment = () => {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -36,6 +37,7 @@ const Payment = () => {
   }, [basket]);
 
   //   console.log("the secret is >>>>", clientSecret);
+  console.log("person is ", user);
 
   const handleSubmit = async (e) => {
     // stripe
@@ -50,6 +52,17 @@ const Payment = () => {
       })
       .then(({ paymentIntent }) => {
         //  paymentIntent = payment confirmation
+        console.log("payment intent is ", paymentIntent);
+
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
 
         console.log("1", processing);
         setSucceeded(true);
